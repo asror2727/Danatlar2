@@ -8,8 +8,8 @@ def _get(name: str, default: str = "") -> str:
     return os.getenv(name, default)
 
 
-BOT_TOKEN = _get("BOT_TOKEN")
-BOT_USERNAME = _get("BOT_USERNAME", "DanatlarBot")
+BOT_TOKEN = _get("8919502028:AAGVzwr9CueZnMFcCF76ooFtNJoc3gqtqQE")
+BOT_USERNAME = _get("danatlaruzbot", "DanatlarBot")
 DB_PATH = _get("DB_PATH", "danat_bot.db")
 
 # TEST_MODE=true bo'lsa: Click/Payme kalitlari to'ldirilmagan bo'lsa ham
