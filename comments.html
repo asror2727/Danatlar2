@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Izohlar</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <h2 class="headline">💬 Izohlar</h2>
+    <div id="postTitle" class="post-title"></div>
+    <div id="commentsList" class="comments-list">
+      <div class="hint">Yuklanmoqda...</div>
+    </div>
+  </div>
+<script>
+  const tg = window.Telegram?.WebApp;
+  tg?.ready();
+  tg?.expand();
+
+  const params = new URLSearchParams(window.location.search);
+  const postId = params.get('post_id') || tg?.initDataUnsafe?.start_param;
+
+  async function load() {
+    const list = document.getElementById('commentsList');
+    if (!postId) {
+      list.innerHTML = '<div class="hint">Post topilmadi</div>';
+      return;
+    }
+    try {
+      const res = await fetch(`/api/comments/${postId}`);
+      const data = await res.json();
+      document.getElementById('postTitle').textContent = data.post_title || '';
+
+      if (!data.comments || data.comments.length === 0) {
+        list.innerHTML = '<div class="hint">Hali izohlar yo\'q</div>';
+        return;
+      }
+
+      list.innerHTML = data.comments.map(c => `
+        <div class="comment-card">
+          <div class="comment-top">
+            <span class="comment-name">${escapeHtml(c.donor_name || 'Noma\'lum')}</span>
+            <span class="comment-amount">${formatAmount(c.amount)} so'm</span>
+          </div>
+          ${c.comment ? `<div class="comment-text">${escapeHtml(c.comment)}</div>` : ''}
+        </div>
+      `).join('');
+    } catch (e) {
+      list.innerHTML = '<div class="hint">Yuklashda xatolik yuz berdi</div>';
+    }
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function formatAmount(n) {
+    return Number(n).toLocaleString('ru-RU').replace(/,/g, ' ');
+  }
+
+  load();
+</script>
+</body>
+</html>

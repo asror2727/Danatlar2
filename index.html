@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Donat qilish</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="channel-card" id="channelCard">
+      <img id="channelLogo" class="channel-logo" src="" alt="">
+      <div class="channel-meta">
+        <div id="channelTitle" class="channel-title">Yuklanmoqda...</div>
+        <div id="channelSubs" class="channel-subs"></div>
+      </div>
+    </div>
+
+    <h2 class="headline">Sevimli kanalingizni qo'llab-quvvatlang!</h2>
+    <div id="postTitle" class="post-title"></div>
+
+    <div class="field-row">
+      <input id="nameInput" class="input" type="text" placeholder="Ismingizni kiriting" maxlength="40">
+      <label class="switch">
+        <input type="checkbox" id="anonToggle">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="hint">Tugma yoqilgan bo'lsa — anonim (ismsiz) ko'rinasiz</div>
+
+    <textarea id="commentInput" class="textarea" placeholder="Izohingizni kiriting..." maxlength="250"></textarea>
+    <div class="counter"><span id="commentCount">0</span>/250</div>
+    <button id="clearCommentBtn" class="btn btn-secondary">Izohni olib tashlash</button>
+
+    <input id="amountInput" class="input" type="number" inputmode="numeric" placeholder="To'lov miqdori (so'm)">
+
+    <div class="provider-row">
+      <button class="provider-btn active" data-provider="click" id="btnClick">💠 Click</button>
+      <button class="provider-btn" data-provider="payme" id="btnPayme">💠 Payme</button>
+    </div>
+
+    <label class="terms-row">
+      <input type="checkbox" id="termsCheck">
+      <span><a href="terms.html" target="_blank">Xizmat shartlari va qoidalari</a>ga rozi bo'ldim</span>
+    </label>
+
+    <button id="donateBtn" class="btn btn-primary" disabled>Donat qilish</button>
+    <div id="errorMsg" class="error"></div>
+  </div>
+
+<script src="app.js"></script>
+</body>
+</html>
